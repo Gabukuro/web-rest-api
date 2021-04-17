@@ -6,7 +6,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     port: 5432,
     username: 'pguser',
     password: 'pgpassword',
-    database: 'web-rest-api',
+    database: 'web_rest_api',
     entities: [__dirname + '/../../**/*.entity.{js,ts}'],
     synchronize: true
 }
