@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ReturnAnimalDto } from 'src/dto/animals/return-animal.dto';
 import { SaveAnimalDto } from 'src/dto/animals/save-animal.dto';
 import { AnimalsService } from './animals.service';
@@ -15,6 +15,17 @@ export class AnimalsController {
         return {
             animal, 
             message: 'Animal salvo com sucesso!'
+        }
+    }
+
+    @Get(':id')
+    async getAnimalById(
+        @Param('id') id
+    ): Promise<ReturnAnimalDto> {
+        const animal = await this.animalsService.getAnimlaById(id);
+        return {
+            animal,
+            message: 'Animal encontrado'
         }
     }
 }

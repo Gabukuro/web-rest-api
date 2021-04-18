@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SaveAnimalDto } from 'src/dto/animals/save-animal.dto';
 import { Animal } from './animals.entity';
@@ -15,5 +15,16 @@ export class AnimalsService {
         saveAnimalDto: SaveAnimalDto
     ): Promise<Animal> {
         return this.animalRepository.saveAnimal(saveAnimalDto);
+    }
+
+    async getAnimlaById(
+        animalId: string
+    ): Promise<Animal> {
+        const user = await this.animalRepository.findOne(animalId, {
+            select: ['descricaoAnimal', 'classeAnimais', 'grupoAnimais']
+        });
+
+        if(!user) throw new NotFoundException('Animal não encontrado');
+        return user;
     }
 }
