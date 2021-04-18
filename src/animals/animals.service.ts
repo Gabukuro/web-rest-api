@@ -1,7 +1,8 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SaveAnimalDto } from 'src/dto/animals/save-animal.dto';
-import { Animal } from './animals.entity';
+import { UpdateAnimalDto } from 'src/dto/animals/update-animal.dto';
+import { Animal, ClasseAnimais, GrupoAnimais } from './animals.entity';
 import { AnimalRepository } from './animals.repository';
 
 @Injectable()
@@ -17,6 +18,24 @@ export class AnimalsService {
         return this.animalRepository.saveAnimal(saveAnimalDto);
     }
 
+    async updateAnimal(
+        updateAnimalDto: UpdateAnimalDto,
+        id: string,
+    ): Promise<Animal> {
+        const animal = await this.animalRepository.findOneOrFail(id);
+        const {descricaoAnimal, grupoAnimais, classeAnimais} = updateAnimalDto;
+        animal.descricaoAnimal = descricaoAnimal ?? animal.descricaoAnimal;
+        animal.grupoAnimais = GrupoAnimais[grupoAnimais] ?? animal.grupoAnimais;
+        animal.classeAnimais = ClasseAnimais[classeAnimais] ?? animal.classeAnimais;
+
+        try {
+            await animal.save();
+            return animal;
+        } catch (error) {
+            throw new InternalServerErrorException('Erro ao salvar os dados no banco');
+        }
+    }
+
     async getAllAnimals(): Promise<Animal[]> {
         const animals = await this.animalRepository.find();
         return animals;
@@ -25,11 +44,11 @@ export class AnimalsService {
     async getAnimalById(
         animalId: string
     ): Promise<Animal> {
-        const user = await this.animalRepository.findOne(animalId, {
+        const animal = await this.animalRepository.findOne(animalId, {
             select: ['descricaoAnimal', 'classeAnimais', 'grupoAnimais']
         });
 
-        if(!user) throw new NotFoundException('Animal não encontrado!');
-        return user;
+        if(!animal) throw new NotFoundException('Animal não encontrado!');
+        return animal;
     }
 }
