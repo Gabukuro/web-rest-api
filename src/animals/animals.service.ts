@@ -45,7 +45,7 @@ export class AnimalsService {
         animalId: string
     ): Promise<Animal> {
         const animal = await this.animalRepository.findOne(animalId, {
-            select: ['descricaoAnimal', 'classeAnimais', 'grupoAnimais']
+            select: ['id', 'descricaoAnimal', 'classeAnimais', 'grupoAnimais']
         });
 
         if(!animal) throw new NotFoundException('Animal não encontrado!');
