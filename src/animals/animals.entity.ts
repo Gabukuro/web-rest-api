@@ -20,7 +20,7 @@ export enum ClasseAnimais {
 @Entity()
 export class Animal extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
-    id: bigint;
+    id: string;
 
     @Column({nullable: false, type: 'varchar', length: 200})
     descricaoAnimal: string;
