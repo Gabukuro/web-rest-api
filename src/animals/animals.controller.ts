@@ -5,7 +5,7 @@ import { UpdateAnimalDto } from 'src/dto/animals/update-animal.dto';
 import { Animal } from './animals.entity';
 import { AnimalsService } from './animals.service';
 
-@Controller('animals')
+@Controller('anima*')
 export class AnimalsController {
     constructor(private animalsService: AnimalsService) {}
 
@@ -32,23 +32,23 @@ export class AnimalsController {
         }
     }
 
+    @Get(':param')
+    async getAnimalByParam(
+        @Param('param') param: string
+        ): Promise<{ animals: Animal[], message: string }> {
+            const animals = await this.animalsService.getAnimalByParam(param);
+            return {
+                animals,
+                message: 'Animal encontrado'
+            }
+        }
+
     @Get()
     async getAllAnimals():  Promise<{ animals: Animal[], message: string }> {
         const animals = await this.animalsService.getAllAnimals();
         return {
-            animals: animals,
+            animals,
             message: 'Animais encontrados com sucesso!'
-        }
-    }
-
-    @Get(':id')
-    async getAnimalById(
-        @Param('id') id: string
-    ): Promise<ReturnAnimalDto> {
-        const animal = await this.animalsService.getAnimalById(id);
-        return {
-            animal,
-            message: 'Animal encontrado'
         }
     }
 

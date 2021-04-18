@@ -1,7 +1,9 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { isEnum, isUUID} from 'class-validator';
 import { SaveAnimalDto } from 'src/dto/animals/save-animal.dto';
 import { UpdateAnimalDto } from 'src/dto/animals/update-animal.dto';
+import { ILike } from 'typeorm';
 import { Animal, ClasseAnimais, GrupoAnimais } from './animals.entity';
 import { AnimalRepository } from './animals.repository';
 
@@ -41,15 +43,27 @@ export class AnimalsService {
         return animals;
     }
 
-    async getAnimalById(
-        animalId: string
-    ): Promise<Animal> {
-        const animal = await this.animalRepository.findOne(animalId, {
-            select: ['id', 'descricaoAnimal', 'classeAnimais', 'grupoAnimais']
+    async getAnimalByParam(
+        param: string
+    ): Promise<Animal[]> {
+
+        let fieldTypes = {
+            'id': isUUID(param),
+            'grupoAnimais': isEnum(param, GrupoAnimais),
+            'classeAnimais': isEnum(param, ClasseAnimais)
+        }
+
+        let field = `descricaoAnimal`;
+        if(Object.values(fieldTypes).includes(true)) {
+            field = Object.keys(fieldTypes)[Object.values(fieldTypes).indexOf(true)];
+        }
+
+        const animals = await this.animalRepository.find({
+            [field]: field != `descricaoAnimal` ? param : ILike(param) 
         });
 
-        if(!animal) throw new NotFoundException('Animal não encontrado!');
-        return animal;
+        if(!animals) throw new NotFoundException('Animal não encontrado!');
+        return animals;
     }
 
     async deleteAnimal(animalId: string) {
