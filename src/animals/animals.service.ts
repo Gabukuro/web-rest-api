@@ -51,4 +51,11 @@ export class AnimalsService {
         if(!animal) throw new NotFoundException('Animal não encontrado!');
         return animal;
     }
+
+    async deleteAnimal(animalId: string) {
+        const result = await this.animalRepository.delete({id: animalId});
+        if(result.affected === 0) {
+            throw new NotFoundException('Não foi encontrado uma animal com o ID informado');
+        }
+    }
 }

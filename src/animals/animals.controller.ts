@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
 import { ReturnAnimalDto } from 'src/dto/animals/return-animal.dto';
 import { SaveAnimalDto } from 'src/dto/animals/save-animal.dto';
 import { UpdateAnimalDto } from 'src/dto/animals/update-animal.dto';
@@ -50,5 +50,13 @@ export class AnimalsController {
             animal,
             message: 'Animal encontrado'
         }
+    }
+
+    @Delete(':id')
+    async deleteAnimal(
+        @Param('id') id: string
+    ) {
+        await this.animalsService.deleteAnimal(id);
+        return {message: 'Animal deletado com sucesso'};
     }
 }
