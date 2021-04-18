@@ -18,7 +18,6 @@ export class AnimalRepository extends Repository<Animal> {
             await animal.save();
             return animal;
         } catch (error) {
-            console.log(error);
             throw new InternalServerErrorException('Erro ao salvar o animal no banco');
         }
     }

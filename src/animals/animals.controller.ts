@@ -11,7 +11,6 @@ export class AnimalsController {
     async saveAnimal(
         @Body() saveAnimalDto: SaveAnimalDto,
     ): Promise<ReturnAnimalDto> {
-        console.log(saveAnimalDto);
         const animal = await this.animalsService.saveAnimal(saveAnimalDto);
         return {
             animal, 
