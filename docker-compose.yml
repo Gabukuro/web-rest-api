@@ -12,6 +12,8 @@ services:
         environment: 
             POSTGRES_USER: pguser
             POSTGRES_PASSWORD: pgpassword
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
     adminer:
         image: adminer
