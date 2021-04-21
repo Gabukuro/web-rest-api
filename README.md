@@ -16,12 +16,14 @@ $ npm install
 # start docker
 $ docker compose up -d
 
-# start watch mode
+# startwatch mode
 $ npm run start:dev
 
 ```
 
 ## Endpoints da API
+
+Você pode importar as configurações do Postamn para testar as rotas neste arquivo [test endpoints.postman_collection.json](./assets/test_endpoints.postman_collection.json).
 
 ### Criar um animal
 

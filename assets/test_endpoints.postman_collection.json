@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "cce145e5-4bb6-4ee1-9285-611777bbf040",
+		"name": "test endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create an animal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "descricaoAnimal",
+							"value": "Cachorro",
+							"type": "text"
+						},
+						{
+							"key": "grupoAnimais",
+							"value": "TERRESTRE",
+							"type": "text"
+						},
+						{
+							"key": "classeAnimais",
+							"value": "MAMIFERO",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/animals",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all animals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/animals/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete an animal",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/animals/{{reference}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						"{{reference}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update an animal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "descricaoAnimal",
+							"value": "Gato",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grupoAnimais",
+							"value": "AQUATICO",
+							"type": "text"
+						},
+						{
+							"key": "classeAnimais",
+							"value": "MAMIFERO",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/animals/{{reference}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						"{{reference}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get animal by param",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/animal/terrestre",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animal",
+						"terrestre"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
