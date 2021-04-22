@@ -4,6 +4,17 @@ Api desenvolvida com [Nest](https://github.com/nestjs/nest) TypeScript framework
 
 Caso ainda não possua o docker em sua máquina, recomendo a leitura da [documentação de instalação](https://docs.docker.com/engine/install/ubuntu/).
 
+## Depêndencias
+
+* npm
+* node
+* express
+* nestjs
+* typescript
+* typeorm
+* class-transformer
+* class-validator
+
 ## Instalação
 
 ```bash
