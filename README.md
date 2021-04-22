@@ -2,7 +2,7 @@
 
 Api desenvolvida com [Nest](https://github.com/nestjs/nest) TypeScript framework, utilizando [Docker](https://docs.docker.com/).
 
-Caso ainda não possua o docker em sua máquina, recomendo a leitura da [documentação de instalação](https://docs.docker.com/engine/install/ubuntu/).
+Caso ainda não possua o docker em sua máquina, recomendo a leitura da [documentação de instalação](https://docs.docker.com/engine/install/).
 
 ## Depêndencias
 
